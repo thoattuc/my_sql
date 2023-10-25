@@ -148,7 +148,7 @@ add FOREIGN KEY (idProcess) REFERENCES process(id);
 ALTER TABLE process_detail
 add FOREIGN KEY (idStudent) REFERENCES students(id);
 
--- --------------------------------------------------------
+-- -------------------------------------------------------
 
 use niam_elearning;
 ALTER TABLE users
@@ -167,7 +167,7 @@ values ('customer', (current_timestamp()));
 -- Hàm:
 SELECT FLOOR(RAND() * (9999 - 1 + 1)) + 1;
 
--- insert_role----------------------------------
+-- insert_role--------------------------------------------
 insert into user_roles(name, created_at)
 values('admin', (current_timestamp()));
 
@@ -177,12 +177,11 @@ values('teacher', (current_timestamp()));
 insert into user_roles(name, created_at)
 values('student', (current_timestamp()));
 
-
-
+-- --------------------------------------------------------
 ALTER TABLE user_roles
 ADD CONSTRAINT  UNIQUE (name);
 
--- insert_users--------------------------------------------------------
+-- insert_users--------------------------------------------
 INSERT INTO users(name, email, idRole, password, created_at)
 VALUES('nam', 'name@gmail.com', 3, '12345', (current_timestamp()));
 
@@ -195,14 +194,14 @@ VALUES('teacher', 'teacher@gmail.com', 2, '12345', (current_timestamp()));
 INSERT INTO users(name, email, idRole, password, created_at)
 VALUES('alien', 'alien@gmail.com', 3, FLOOR(RAND() * (9999 - 1 + 1)) + 1, (current_timestamp()));
 
--- insert_edu-------------------------------------------------------------
+-- insert_edu-------------------------------------------------
 insert into educations(name, created_at)
 values
 	('Chương trình IELTS',(current_timestamp())),
 	('Chương trình phổ thông quốc tế Cambridge',(current_timestamp())),
 	('Chương trình lập trình',(current_timestamp()));
     
--- insert_course-----------------------------------------------------
+-- insert_course------------------------------------------------
 INSERT INTO course (name, summary, price, idCate, duration, description)
 VALUES 
 	('Toán Học 10', 'Tóm tắt', 500, 2, 80, 'Mô tả'),
@@ -213,7 +212,7 @@ VALUES
 insert into schedule()
 VALUEs
 	();
--- insert_cate--------------------------------------------------
+-- insert_cate------------------------------------------------------
 insert into categrories(name, idEdu, created_at)
 values
 	('KHTN', 2, (current_timestamp())),
@@ -221,7 +220,7 @@ values
     ('Tin Học', 3, (current_timestamp()));
 
 
--- insert_students------------------------------------------------
+-- insert_students---------------------------------------------------
 INSERT into students(name , email, password, created_at)
 values
 	('nam', 'nam@gmail.com', '12345', (current_timestamp())),
