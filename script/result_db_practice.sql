@@ -123,19 +123,21 @@ GROUP BY hoa_don_chi_tiet.idHD
 ORDER BY 'Tổng tiền' DESC
 LIMIT 1;
 
--- SELECT MAX(subquery.`Tổng tiền`) as 'Tổng tiền lớn nhất'
--- FROM (
---     SELECT
---         products.name as 'Sản phẩm',
---         count(idSP) as 'Số lượng',
---         sum(ceil((100-products.discount)*(total_cost(products.price, hoa_don_chi_tiet.soLuong))/100)) as 'Tổng tiền'
---     FROM hoa_don_chi_tiet
---     JOIN products ON hoa_don_chi_tiet.idSP = products.id
---     GROUP BY hoa_don_chi_tiet.idHD
--- ) as subquery;
+-- Use func MAX():
+SELECT MAX(subquery.`Tổng tiền`) as 'Tổng tiền lớn nhất'
+FROM (
+    SELECT
+        products.name as 'Sản phẩm',
+        count(idSP) as 'Số lượng',
+        sum(ceil((100-products.discount)*(total_cost(products.price, hoa_don_chi_tiet.soLuong))/100)) as 'Tổng tiền'
+    FROM hoa_don_chi_tiet
+    JOIN products ON hoa_don_chi_tiet.idSP = products.id
+    GROUP BY hoa_don_chi_tiet.idHD
+) as subquery;
 
 -- ==========================================================
 use db_practice;
+
 -- 1. Liệt kê thông tin tài khoản : Tên tài khoản, trạng thái , ngày tạo , tên loại tài khoản
 SELECT users.name, users.status, users.created_at, roles.name
 from users
@@ -182,13 +184,23 @@ GROUP BY hoa_don.idUser;
 
 -- 7. Lấy ra sản phẩm có số lượng mua cao nhất:
 select 	products.name,
-		count(idSP) as 'So luong'
+		count(idSP) as 'So luong cao nhat'
 from hoa_don_chi_tiet
 join products on hoa_don_chi_tiet.idSP = products.id
 GROUP BY hoa_don_chi_tiet.idHD
 ORDER BY count(idSP) DESC
 LIMIT 1;
 
--- 8.
--- 9. Lấy ra sản phẩm mang lại doanh thu thấp nhất
-		
+-- 8. Lấy ra sản phẩm mang lại doanh thu cao nhất:
+-- 9. Lấy ra sản phẩm mang lại doanh thu thấp nhất:
+-- 10. Lấy ra sản phẩm có số lượng thấp nhất:
+
+SELECT MIN(subquery.`Số lượng`) as 'So luong thap nhat'
+FROM (
+    SELECT
+        products.name as 'Sản phẩm',
+        count(idSP) as 'Số lượng'
+    FROM hoa_don_chi_tiet
+    JOIN products ON hoa_don_chi_tiet.idSP = products.id
+    GROUP BY hoa_don_chi_tiet.idHD
+) as subquery;
