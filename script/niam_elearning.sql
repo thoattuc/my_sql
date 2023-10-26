@@ -226,3 +226,15 @@ values
 	('nam', 'nam@gmail.com', '12345', (current_timestamp())),
     ('alien', 'alien@gmail.com', '12345', (current_timestamp())),
     ('abc', 'abc@gmail.com', '12345', (current_timestamp()));
+    
+    
+-- UPDATE: update table_name
+-- set col = VAL
+-- where condition;
+
+select id, name, idRole, status from users;
+
+-- sql-join:
+select users.id, users.name, users.status, user_roles.name
+from users
+inner join user_roles on users.idRole = user_roles.id;
